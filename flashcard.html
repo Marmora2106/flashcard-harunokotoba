@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flashcard - 日本語を学ぼう！</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <main class="dashboard">
+    <button class="back-button" id="back-btn">
+      <i class="ti ti-arrow-left" aria-hidden="true"></i> Kembali
+    </button>
+
+    <p class="breadcrumb" id="breadcrumb"></p>
+
+    <h1 class="title" id="page-title"></h1>
+
+    <section id="card-view">
+      <button class="flashcard" id="flip-card" aria-label="Klik untuk membalik kartu">
+        <div class="flashcard-inner" id="flashcard-inner">
+          <div class="flashcard-face flashcard-front">
+            <div class="front-kotoba" id="front-kotoba" hidden>
+              <p class="flashcard-word" id="card-word"></p>
+              <p class="flashcard-meaning" id="card-meaning"></p>
+            </div>
+
+            <div class="front-kanji" id="front-kanji" hidden>
+              <div class="kanji-char" id="kanji-char"></div>
+              <div class="kanji-info">
+                <div class="kanji-info-row">
+                  <span class="kanji-info-label">On'yomi</span>
+                  <span class="kanji-info-value" id="kanji-onyomi"></span>
+                </div>
+                <div class="kanji-info-row">
+                  <span class="kanji-info-label">Kun'yomi</span>
+                  <span class="kanji-info-value" id="kanji-kunyomi"></span>
+                </div>
+                <div class="kanji-info-row">
+                  <span class="kanji-info-label">Arti</span>
+                  <span class="kanji-info-value" id="kanji-arti"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flashcard-face flashcard-back">
+            <div class="flashcard-examples" id="card-examples"></div>
+          </div>
+        </div>
+      </button>
+      <p class="flip-hint">Klik kartu untuk lihat contoh kalimat</p>
+      <div class="flashcard-nav">
+        <button id="prev-btn"><i class="ti ti-chevron-left" aria-hidden="true"></i> Sebelumnya</button>
+        <div class="flashcard-dots" id="card-dots"></div>
+        <button id="next-btn">Selanjutnya <i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="js/flashcard.js"></script>
+</body>
+</html>

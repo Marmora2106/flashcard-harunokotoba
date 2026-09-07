@@ -1,0 +1,486 @@
+:root {
+  --bg-page: #f5f3ec;
+  --surface: #fffdf7;
+  --text-primary: #262420;
+  --text-secondary: #6b6862;
+  --text-muted: #9a978f;
+
+  --blue: #7fb1e0;
+  --blue-text: #1a3c5e;
+
+  --amber: #e0a527;
+  --amber-text: #4a3308;
+
+  --green: #7fbf6a;
+  --green-text: #1c3813;
+
+  --radius-card: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-page);
+  font-family: "Hiragino Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text-primary);
+}
+
+.dashboard {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--surface);
+  padding: 28px 5vw 60px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.teacher-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border: 1px solid var(--blue-text);
+  border-radius: 999px;
+  color: var(--blue-text);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.teacher-badge:hover {
+  background: rgba(26, 60, 94, 0.06);
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  margin: 8px 0 6px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 0 0 32px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  border: none;
+  border-radius: var(--radius-card);
+  min-height: 420px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.card-icon-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon {
+  font-size: 160px;
+  line-height: 1;
+}
+
+.card-label {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.card--kotoba {
+  background: var(--blue);
+}
+.card--kotoba .card-icon,
+.card--kotoba .card-label {
+  color: var(--blue-text);
+}
+
+.card--kanji {
+  background: var(--amber);
+}
+.card--kanji .card-icon,
+.card--kanji .card-label {
+  color: var(--amber-text);
+}
+
+.card--renshu {
+  background: var(--green);
+}
+.card--renshu .card-icon,
+.card--renshu .card-label {
+  color: var(--green-text);
+}
+
+/* Halaman kategori: warna per kategori */
+.cat-kotoba {
+  --accent: var(--blue);
+  --accent-text: var(--blue-text);
+}
+.cat-kanji {
+  --accent: var(--amber);
+  --accent-text: var(--amber-text);
+}
+.cat-renshu {
+  --accent: var(--green);
+  --accent-text: var(--green-text);
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 6px 0;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.back-button:hover {
+  color: var(--text-primary);
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+.breadcrumb span {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.tile {
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: var(--radius-card);
+  padding: 1.25rem 1rem;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.tile--compact {
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  min-height: 90px;
+}
+
+.tile-meta {
+  font-size: 12px;
+}
+
+.tile-label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.empty-message {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.flashcard {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  perspective: 1200px;
+  font-family: inherit;
+  display: block;
+}
+
+.flashcard-inner {
+  position: relative;
+  min-height: 260px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.flashcard-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: var(--accent);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.front-kotoba[hidden],
+.front-kanji[hidden] {
+  display: none;
+}
+
+.front-kotoba {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.flashcard-word {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 700;
+  color: var(--accent-text);
+  margin: 0;
+}
+
+.flashcard-word ruby {
+  ruby-align: center;
+}
+
+.flashcard-word rt {
+  font-size: 0.32em;
+  font-weight: 500;
+  color: var(--accent-text);
+  opacity: 0.75;
+  letter-spacing: 0.02em;
+}
+
+.front-kanji {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+.kanji-char {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(64px, 14vw, 140px);
+  font-weight: 700;
+  color: var(--accent-text);
+}
+
+.kanji-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  text-align: left;
+}
+
+.kanji-info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kanji-info-label {
+  font-size: 12px;
+  color: var(--accent-text);
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kanji-info-value {
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 700;
+  color: var(--accent-text);
+}
+
+@media (max-width: 560px) {
+  .front-kanji {
+    gap: 12px;
+  }
+  .kanji-info {
+    gap: 8px;
+  }
+}
+
+.flashcard-meaning {
+  font-size: 18px;
+  color: var(--accent-text);
+  margin: 0;
+}
+
+.flashcard-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.example-item {
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.example-item:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.flashcard-example {
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-weight: 700;
+  color: var(--accent-text);
+  margin: 0;
+}
+
+.flashcard-example-meaning {
+  font-size: 15px;
+  color: var(--accent-text);
+  margin: 4px 0 0;
+}
+
+.flip-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 10px 0 0;
+}
+
+.flashcard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.flashcard-nav button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.flashcard-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  opacity: 0.4;
+}
+
+.dot--active {
+  opacity: 1;
+  background: var(--accent-text);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .card {
+    min-height: 320px;
+  }
+  .card-icon {
+    font-size: 120px;
+  }
+}
+
+/* Ponsel */
+@media (max-width: 560px) {
+  .dashboard {
+    padding: 20px 5vw 40px;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card {
+    min-height: 220px;
+    padding: 20px;
+  }
+  .card-icon {
+    font-size: 90px;
+  }
+  .card-label {
+    font-size: 18px;
+  }
+}

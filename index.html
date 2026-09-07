@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>日本語を学ぼう！</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <main class="dashboard">
+    <header class="topbar">
+      <a class="teacher-badge" href="#">
+        ハル先生
+        <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <h1 class="title">日本語を学ぼう！</h1>
+    <p class="subtitle">Belajar Kotoba &amp; Kanji dengan Flashcard.</p>
+
+    <section class="card-grid">
+      <button class="card card--kotoba" data-category="kotoba">
+        <span class="card-icon-wrap">
+          <i class="ti ti-mood-smile card-icon" aria-hidden="true"></i>
+        </span>
+        <span class="card-label">言葉</span>
+      </button>
+
+      <button class="card card--kanji" data-category="kanji">
+        <span class="card-icon-wrap">
+          <i class="ti ti-robot card-icon" aria-hidden="true"></i>
+        </span>
+        <span class="card-label">漢字</span>
+      </button>
+
+      <button class="card card--renshu" data-category="renshu">
+        <span class="card-icon-wrap">
+          <i class="ti ti-target-arrow card-icon" aria-hidden="true"></i>
+        </span>
+        <span class="card-label">練習</span>
+      </button>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
