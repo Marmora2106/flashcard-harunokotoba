@@ -35,6 +35,27 @@ const state = {
   cardIndex: 0,
 };
 
+// Mengubah format "待[ま]ち合[あ]わせる" jadi HTML dengan <ruby> hanya
+// di atas bagian kanji-nya saja, bagian hiragana di luar kurung dibiarkan.
+// Kalau tidak ada tanda kurung sama sekali, teks dikembalikan apa adanya.
+function parseKanjiBracketFurigana(text) {
+  if (!text || !text.includes("[")) return null;
+
+  const regex = /([\p{Script=Han}]+)\[([^\[\]]+)\]/gu;
+  let result = "";
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    result += text.slice(lastIndex, match.index);
+    result += `<ruby>${match[1]}<rt>${match[2]}</rt></ruby>`;
+    lastIndex = regex.lastIndex;
+  }
+  result += text.slice(lastIndex);
+
+  return result;
+}
+
 init();
 
 function showErrorMessage(message) {
@@ -92,11 +113,17 @@ function renderCurrentCard() {
 
   if (cat === "kotoba") {
     const wordEl = document.getElementById("card-word");
-    const furiganaValue = card.furigana || card.hiragana;
-    if (furiganaValue && furiganaValue.trim() !== "" && furiganaValue !== card.kosakata) {
-      wordEl.innerHTML = `<ruby>${card.kosakata}<rt>${furiganaValue}</rt></ruby>`;
+    const bracketHtml = parseKanjiBracketFurigana(card.kosakata);
+
+    if (bracketHtml) {
+      wordEl.innerHTML = bracketHtml;
     } else {
-      wordEl.textContent = card.kosakata;
+      const furiganaValue = card.furigana || card.hiragana;
+      if (furiganaValue && furiganaValue.trim() !== "" && furiganaValue !== card.kosakata) {
+        wordEl.innerHTML = `<ruby>${card.kosakata}<rt>${furiganaValue}</rt></ruby>`;
+      } else {
+        wordEl.textContent = card.kosakata;
+      }
     }
     document.getElementById("card-meaning").textContent = card.arti;
   } else if (cat === "kanji") {
