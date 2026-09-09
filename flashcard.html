@@ -24,7 +24,6 @@
           <div class="flashcard-face flashcard-front">
             <div class="front-kotoba" id="front-kotoba" hidden>
               <p class="flashcard-word" id="card-word"></p>
-              <p class="flashcard-meaning" id="card-meaning"></p>
             </div>
 
             <div class="front-kanji" id="front-kanji" hidden>
@@ -46,11 +45,23 @@
             </div>
           </div>
           <div class="flashcard-face flashcard-back">
+            <div class="kotoba-back-meta" id="kotoba-back-meta" hidden>
+              <div class="back-meta-row" id="back-meta-row">
+                <div class="back-meta-col" id="back-reading-col">
+                  <span class="back-meta-label">Cara Baca</span>
+                  <span class="back-meta-value" id="back-reading-value"></span>
+                </div>
+                <div class="back-meta-col back-meta-col--right" id="back-arti-col">
+                  <span class="back-meta-label">Arti</span>
+                  <span class="back-meta-value" id="back-arti-value"></span>
+                </div>
+              </div>
+            </div>
             <div class="flashcard-examples" id="card-examples"></div>
           </div>
         </div>
       </button>
-      <p class="flip-hint">Klik kartu untuk lihat contoh kalimat</p>
+      <p class="flip-hint" id="flip-hint">Klik kartu untuk lihat cara baca &amp; arti</p>
       <div class="flashcard-nav">
         <button id="prev-btn"><i class="ti ti-chevron-left" aria-hidden="true"></i> Sebelumnya</button>
         <div class="flashcard-dots" id="card-dots"></div>
