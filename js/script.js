@@ -15,7 +15,7 @@ function goToCategory(category) {
   } else if (category === "kanji") {
     window.location.href = "kanji.html";
   } else {
-    // 練習 belum dibuatkan halamannya.
+    // 文法 dan 練習 belum dibuatkan halamannya.
     console.log(`Kategori "${category}" belum tersedia.`);
   }
 }
