@@ -43,6 +43,8 @@ body {
   min-height: 100vh;
   background: var(--surface);
   padding: 28px 5vw 60px;
+  display: flex;
+  flex-direction: column;
 }
 
 .topbar {
@@ -266,8 +268,17 @@ body {
   font-size: 14px;
 }
 
+#card-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
 .flashcard {
   width: 100%;
+  flex: 1;
+  min-height: 0;
   border: none;
   background: transparent;
   padding: 0;
@@ -279,7 +290,8 @@ body {
 
 .flashcard-inner {
   position: relative;
-  min-height: 260px;
+  height: 100%;
+  min-height: 220px;
   transform-style: preserve-3d;
   transition: transform 0.5s ease;
 }
@@ -305,6 +317,10 @@ body {
 
 .flashcard-back {
   transform: rotateY(180deg);
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+  overflow-y: auto;
 }
 
 .front-kotoba[hidden],
@@ -394,23 +410,63 @@ body {
   }
 }
 
-.flashcard-meaning {
-  font-size: 18px;
+.kotoba-back-meta {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.kotoba-back-meta[hidden] {
+  display: none;
+}
+
+.back-meta-row {
+  display: flex;
+  gap: 12px;
+}
+
+.back-meta-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.back-meta-col[hidden] {
+  display: none;
+}
+
+.back-meta-col--right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.back-meta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--accent-text);
-  margin: 0;
+  opacity: 0.7;
+}
+
+.back-meta-value {
+  font-size: clamp(17px, 3vw, 22px);
+  font-weight: 700;
+  color: var(--accent-text);
 }
 
 .flashcard-examples {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
   overflow-y: auto;
   max-height: 100%;
 }
 
 .example-item {
-  padding-top: 12px;
+  padding-top: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
@@ -420,7 +476,7 @@ body {
 }
 
 .flashcard-example {
-  font-size: clamp(20px, 3.5vw, 28px);
+  font-size: clamp(14px, 2.6vw, 17px);
   font-weight: 700;
   color: var(--accent-text);
   margin: 0;
@@ -438,9 +494,9 @@ body {
 }
 
 .flashcard-example-meaning {
-  font-size: 15px;
+  font-size: 12px;
   color: var(--accent-text);
-  margin: 4px 0 0;
+  margin: 2px 0 0;
 }
 
 .flip-hint {
