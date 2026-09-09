@@ -141,14 +141,15 @@ function renderCurrentCard() {
 
   const examplesContainer = document.getElementById("card-examples");
   examplesContainer.innerHTML = examples
-    .map(
-      (ex) => `
+    .map((ex) => {
+      const kalimatHtml = parseKanjiBracketFurigana(ex.kalimat) || ex.kalimat;
+      return `
         <div class="example-item">
-          <p class="flashcard-example">${ex.kalimat}</p>
+          <p class="flashcard-example">${kalimatHtml}</p>
           <p class="flashcard-example-meaning">${ex.arti}</p>
         </div>
-      `
-    )
+      `;
+    })
     .join("");
 
   document.getElementById("flashcard-inner").classList.remove("is-flipped");
