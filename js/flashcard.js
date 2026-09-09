@@ -56,13 +56,40 @@ function parseKanjiBracketFurigana(text) {
   return result;
 }
 
+// Menghapus tanda kurung bacaan, jadi tersisa kanji+okurigana polos saja.
+// Dipakai untuk tampilan depan kartu (tanpa furigana).
+function stripFuriganaBrackets(text) {
+  if (!text) return text;
+  return text.replace(/\[[^\]]*\]/g, "");
+}
+
+// Menggabungkan seluruh bacaan dari format "待[ま]ち合[あ]わせる" jadi satu
+// string hiragana utuh ("まちあわせる"). Dipakai untuk kolom "Cara Baca".
+// Mengembalikan null kalau tidak ada tanda kurung sama sekali.
+function extractFullReading(text) {
+  if (!text || !text.includes("[")) return null;
+
+  const regex = /([\p{Script=Han}]+)\[([^\[\]]+)\]/gu;
+  let result = "";
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    result += text.slice(lastIndex, match.index);
+    result += match[2];
+    lastIndex = regex.lastIndex;
+  }
+  result += text.slice(lastIndex);
+
+  return result;
+}
+
 init();
 
 function showErrorMessage(message) {
   document.getElementById("front-kanji").hidden = true;
   document.getElementById("front-kotoba").hidden = false;
   document.getElementById("card-word").textContent = message;
-  document.getElementById("card-meaning").textContent = "";
 }
 
 async function init() {
@@ -110,27 +137,38 @@ async function init() {
 
 function renderCurrentCard() {
   const card = state.cards[state.cardIndex];
+  const flipHint = document.getElementById("flip-hint");
 
   if (cat === "kotoba") {
     const wordEl = document.getElementById("card-word");
-    const bracketHtml = parseKanjiBracketFurigana(card.kosakata);
+    const plainWord = stripFuriganaBrackets(card.kosakata);
+    wordEl.textContent = plainWord;
 
-    if (bracketHtml) {
-      wordEl.innerHTML = bracketHtml;
-    } else {
-      const furiganaValue = card.furigana || card.hiragana;
-      if (furiganaValue && furiganaValue.trim() !== "" && furiganaValue !== card.kosakata) {
-        wordEl.innerHTML = `<ruby>${card.kosakata}<rt>${furiganaValue}</rt></ruby>`;
-      } else {
-        wordEl.textContent = card.kosakata;
-      }
+    const reading =
+      extractFullReading(card.kosakata) || card.furigana || card.hiragana;
+    const hasReading =
+      reading && reading.trim() !== "" && reading !== plainWord;
+
+    document.getElementById("kotoba-back-meta").hidden = false;
+    document.getElementById("back-reading-col").hidden = !hasReading;
+    document.getElementById("back-arti-col").classList.toggle(
+      "back-meta-col--right",
+      hasReading
+    );
+
+    if (hasReading) {
+      document.getElementById("back-reading-value").textContent = reading;
     }
-    document.getElementById("card-meaning").textContent = card.arti;
+    document.getElementById("back-arti-value").textContent = card.arti;
+
+    flipHint.textContent = "Klik kartu untuk lihat cara baca & arti";
   } else if (cat === "kanji") {
     document.getElementById("kanji-char").textContent = card.kanji;
     document.getElementById("kanji-onyomi").textContent = card.onyomi || "-";
     document.getElementById("kanji-kunyomi").textContent = card.kunyomi || "-";
     document.getElementById("kanji-arti").textContent = card.arti || "-";
+    document.getElementById("kotoba-back-meta").hidden = true;
+    flipHint.textContent = "Klik kartu untuk lihat contoh kalimat";
   }
 
   const examples = [
