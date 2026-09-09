@@ -14,6 +14,9 @@
   --green: #7fbf6a;
   --green-text: #1c3813;
 
+  --purple: #a78bd8;
+  --purple-text: #3a2762;
+
   --radius-card: 16px;
 }
 
@@ -80,7 +83,7 @@ body {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
@@ -142,6 +145,14 @@ body {
   color: var(--amber-text);
 }
 
+.card--bunpou {
+  background: var(--purple);
+}
+.card--bunpou .card-icon,
+.card--bunpou .card-label {
+  color: var(--purple-text);
+}
+
 .card--renshu {
   background: var(--green);
 }
@@ -158,6 +169,10 @@ body {
 .cat-kanji {
   --accent: var(--amber);
   --accent-text: var(--amber-text);
+}
+.cat-bunpou {
+  --accent: var(--purple);
+  --accent-text: var(--purple-text);
 }
 .cat-renshu {
   --accent: var(--green);
